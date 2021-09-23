@@ -1,9 +1,11 @@
 import tkinter
 import random
+from functools import partial
 
 #private
 state = 1
 root = tkinter.Tk()
+root.resizable(False, False)
 setCanvas = tkinter.Canvas(width=350, height=240)
 workingCanvas = tkinter.Canvas()
 hasCanvas = 0
@@ -86,7 +88,31 @@ COLORS  = ['snow', 'ghost white', 'white smoke', 'gainsboro', 'floral white', 'o
     'gray66', 'gray67', 'gray68', 'gray69', 'gray70', 'gray71', 'gray72', 'gray73', 'gray74',
     'gray75', 'gray76', 'gray77', 'gray78', 'gray79', 'gray80', 'gray81', 'gray82', 'gray83',
     'gray84', 'gray85', 'gray86', 'gray87', 'gray88', 'gray89', 'gray90', 'gray91', 'gray92',
-    'gray93', 'gray94', 'gray95', 'gray97', 'gray98', 'gray99']
+    'gray93', 'gray94', 'gray95', 'gray97', 'gray98', 'gray99', 'white']
+
+def color_pressed(color):
+    print(color)
+
+def create_colorpicker():
+    global pickerTop
+    pickerTop = tkinter.Toplevel(root)
+    pickerTop.resizable(False, False)
+    pickerCanvas = tkinter.Canvas(pickerTop, width=895, height=475)
+    pickerCanvas.pack()
+
+    x = 0
+    y = 0
+
+    for i in range(1, len(COLORS) + 1):
+        act = partial(color_pressed, COLORS[i - 1])
+        tkinter.Button(pickerCanvas, width=3, height=2, bg=COLORS[i-1], command=act).place(x=x, y=y)
+
+        x+=30
+        if (i % 30 == 0):
+            y += 30
+            x = 0
+
+    pickerTop.mainloop()
 
 #create string variables
 tHeight = tkinter.StringVar()
@@ -180,5 +206,6 @@ def ex():
 
 #main
 setting()
+create_colorpicker()
 root.mainloop()
 
