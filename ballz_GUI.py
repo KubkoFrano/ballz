@@ -173,7 +173,7 @@ def setting():
 
     #create button
     btn = tkinter.Button(root, text="BALLZ", command=ex)
-    btn.place(x=xEn + 97, y=200)
+    btn.place(x=xSet+100, y=200)
 
 def ex():
     #get new values
@@ -188,6 +188,7 @@ def ex():
     tempTimes = int(tTimes.get())
 
     top = tkinter.Toplevel(root)
+    top.resizable(False, False)
     bigFont = ("Arial", tempBackSize, "bold")
     smallFont = ("Arial", tempFrontSize, "bold")
     workingCanvas = tkinter.Canvas(top, height=tempHeight, width=tempWidth, bg=tempBackgroundColor)
